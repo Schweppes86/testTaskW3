@@ -53,7 +53,7 @@ public class SQLSandboxHelper {
                 "City = '" + customer.getCity() + "', "  +
                 "PostalCode = '" + customer.getZipCode() + "', " +
                 "Country = '" + customer.getCountryCode() + "'" +
-                "WHERE CustomerID = " + customer.getCustomerID());
+                " WHERE CustomerID = " + customer.getCustomerID());
 
         elementShouldHaveText(resultSQLExpresion, "You have made changes to the database. Rows affected: 1");
     }
@@ -73,7 +73,7 @@ public class SQLSandboxHelper {
 
     @Step
     public static void checkResultRowCount(int expectedCount) {
-        elementShouldAppear(resultSQLExpresion);
+        elementShouldAppear(resultTableRow);
         int actualCount = $$(resultTableRow).size() - 1;
         assertEquals(actualCount, expectedCount, "Expected count " + expectedCount + ", but found " + actualCount);
     }
@@ -88,7 +88,7 @@ public class SQLSandboxHelper {
 
     @Step
     public static void checkAddressByCustomerName(String customerNameValue, String expectedAddressValue) {
-        elementShouldAppear(resultSQLExpresion);
+        elementShouldAppear(resultTable);
         By rowValueByCustomerName = By.xpath(String.format("//*/table//td[3][contains(text(),'%s')]/..", customerNameValue));
         Assert.notNull(rowValueByCustomerName, "Can't find elements with Customer Name " + customerNameValue);
         elementShouldBeVisible(rowValueByCustomerName);
@@ -97,7 +97,7 @@ public class SQLSandboxHelper {
 
     @Step
     public static void checkRowIsExists(Customer customer) {
-        elementShouldAppear(resultSQLExpresion);
+        elementShouldAppear(resultTable);
         String expectedRow = customer.getCustomerID() + " " + customer.getFullName() +" " + customer.getContactName()
                 + " " + customer.getAddress() + " " + customer.getCity() + " "
                 + customer.getZipCode() + " " + customer.getCountryCode();
@@ -108,7 +108,7 @@ public class SQLSandboxHelper {
 
     @Step
     public static void checkRowIsDeleted(Customer customer) {
-        elementShouldAppear(resultSQLExpresion);
+        elementShouldAppear(resultTable);
         String expectedRow = customer.getCustomerID() + " " + customer.getFullName() +" " + customer.getContactName()
                 + " " + customer.getAddress() + " " + customer.getCity() + " "
                 + customer.getZipCode() + " " + customer.getCountryCode();

@@ -1,11 +1,11 @@
 package org.seleniumproject.tests;
 
 import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.AfterAll;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static org.seleniumproject.helpers.SQLSandboxHelper.checkAndSubmitPrivacyPopup;
 
@@ -13,7 +13,7 @@ public abstract class TestBase {
     public static boolean privacyPopupAccepted = false;
 
     @BeforeAll
-    static void init(){
+    protected static void init(){
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 60000;
         Configuration.browser = "chrome";
@@ -26,17 +26,12 @@ public abstract class TestBase {
     }
 
     @BeforeEach
-    void setup() {
+    protected void setup() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         open(Configuration.baseUrl);
         if (!privacyPopupAccepted) {
             checkAndSubmitPrivacyPopup();
             privacyPopupAccepted = true;
         }
-    }
-
-
-    @AfterAll
-    static void close(){
-        closeWebDriver();
     }
 }
