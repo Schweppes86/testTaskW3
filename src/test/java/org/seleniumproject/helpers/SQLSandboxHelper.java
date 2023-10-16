@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import dev.failsafe.internal.util.Assert;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.seleniumproject.testObject.Customer;
+import org.seleniumproject.testobjects.Customer;
 
 
 import static com.codeborne.selenide.Selenide.*;

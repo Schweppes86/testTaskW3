@@ -1,4 +1,4 @@
-package org.seleniumproject.testObject;
+package org.seleniumproject.testobjects;
 
 import com.github.javafaker.Faker;
 

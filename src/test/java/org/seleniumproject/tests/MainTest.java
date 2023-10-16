@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seleniumproject.helpers.SQLSandboxHelper;
-import org.seleniumproject.testObject.Customer;
+import org.seleniumproject.testobjects.Customer;
 import org.seleniumproject.utils.TestListener;
 
 @ExtendWith(TestListener.class)
